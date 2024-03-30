@@ -1,0 +1,14 @@
+#https://github.com/marketplace/actions/helm-oci-chart-releaser
+  - name: Chart | Push
+    uses: appany/helm-oci-chart-releaser@v0.3.0
+    with:
+        name: terraria
+        repository: chart-terraria
+        tag: 0.1.9
+        path: charts/terraria # Default charts/{name}
+        registry: harbor.dev.dreebot.net
+        registry_username: ${{ secrets.REGISTRY_USERNAME }}
+        registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+        update_dependencies: 'true' # Defaults to false
+  
+# helm pull ghcr.io/appany/my-chart:0.1.0

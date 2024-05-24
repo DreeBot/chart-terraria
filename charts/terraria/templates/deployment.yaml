@@ -82,6 +82,28 @@ spec:
               mountPath: /tshock-config
         {{- end }}
       containers:
+        - env:
+          - name: CONFIG_PATH
+            value: /dreebot/terraria.json
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          image: harbor.dev.dreebot.net/monitor/monitor:latest
+          imagePullPolicy: Always
+          name: monitor
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
         - name: {{ .Chart.Name }}
           image: {{ tpl .Values.image.terraria.repository . }}:{{ tpl .Values.image.terraria.tag . }}
           imagePullPolicy: {{ default .Values.image.pullPolicy .Values.image.terraria.pullPolicy }}

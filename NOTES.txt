@@ -1,0 +1,2 @@
+helm package .
+helm push terraria-0.1.9-2.tgz oci://harbor.dev.dreebot.net/chart-terraria --insecure-skip-tls-verify

@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         {{- include "terraria.selectorLabels" . | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/data/metrics'
+        prometheus.io/port: '8000'
     spec:
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
